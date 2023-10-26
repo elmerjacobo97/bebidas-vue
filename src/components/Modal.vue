@@ -1,14 +1,14 @@
 
 <script setup>
+import { computed } from 'vue';
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { useModalStore } from '../stores/modal';
 import { useDrinksStore } from '../stores/drinks';
-import { computed } from 'vue';
-
+import { useFavoritesStore } from '../stores/favorites';
 
 const modal = useModalStore();
 const drinks = useDrinksStore();
-
+const favorites = useFavoritesStore();
 
 const formattedIngredients = computed(() => {
   let ingredients = [];
@@ -82,8 +82,8 @@ const displayInstructions = computed(() => {
                     class="px-4 py-2 text-gray-700 transition duration-300 bg-gray-100 rounded-lg hover:bg-gray-200"
                     @click="modal.toggleModal">Cerrar</button>
                   <button type="button"
-                    class="px-4 py-2 text-white transition duration-300 bg-orange-400 rounded-lg hover:bg-orange-500">Agregar
-                    a favoritos</button>
+                    class="px-4 py-2 text-white transition duration-300 bg-orange-400 rounded-lg hover:bg-orange-500"
+                    @click="favorites.handleClickFavorites">{{ modal.textButton }}</button>
                 </div>
               </div>
             </DialogPanel>
